@@ -15,8 +15,6 @@
 
 	</servlet>
 
-
-
 	<servlet-mapping>
 		<servlet-name>amazon-music</servlet-name>
 		<url-pattern>/</url-pattern>
