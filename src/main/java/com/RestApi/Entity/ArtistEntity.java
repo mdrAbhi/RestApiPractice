@@ -19,10 +19,13 @@ public class ArtistEntity {
 
 	@Column(name = "name")
 	private String name;
+
 	@Column(name = "genre")
 	private String genre;
+	
 	@Column(name = "country")
 	private String country;
+	
 	@Column(name = "created_at")
 	private Date createdAt;
 
