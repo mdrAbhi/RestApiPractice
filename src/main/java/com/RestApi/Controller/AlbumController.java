@@ -14,28 +14,37 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.RestApi.Dto.AlbumDto;
 import com.RestApi.Dto.ArtistDto;
+import com.RestApi.Dto.SongDto;
+import com.RestApi.Entity.AlbumEntity;
+import com.RestApi.Entity.SongEntity;
 import com.RestApi.Service.AlbumService;
 import com.RestApi.Service.ArtistService;
+import com.RestApi.Service.SongService;
 
 @RestController
 @RequestMapping("/albums")
 public class AlbumController {
-	
 
-
-
-	
 	@Autowired
 	private AlbumService albumService;
 
+	@Autowired
+	private SongService songService;
+
 	@RequestMapping(value = "", method = RequestMethod.GET)
-	public void test() {
-		System.out.println("this is a test");
+	public AlbumDto get(@RequestParam(value = "id") Long aId) {
+		return  albumService.getSongsByAlbumId(aId);		
+		// TODO get the album with an id plus the songs the album has
 	}
-	
+
 	@RequestMapping(value = "", method = RequestMethod.POST)
-	public void createAlbum(@RequestParam Long artistId,
-			@RequestBody AlbumDto albumDto) throws Exception {
+	public void createAlbum(@RequestParam(value = "id") Long artistId, @RequestBody AlbumDto albumDto)
+			throws Exception {
 		albumService.createAlbum(artistId, albumDto);
+	}
+
+	@RequestMapping(value = "/{id}/songs", method = RequestMethod.POST)
+	public void addSongs(@PathVariable(value = "id") Long albumId, @RequestBody List<SongDto> songs) throws Exception {
+		songService.createSongs(songs, albumId);
 	}
 }

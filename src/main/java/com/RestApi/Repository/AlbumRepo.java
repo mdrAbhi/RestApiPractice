@@ -2,6 +2,7 @@ package com.RestApi.Repository;
 
 import java.util.List;
 
+import javax.persistence.EntityManager;
 import javax.persistence.Query;
 import javax.persistence.UniqueConstraint;
 
@@ -22,5 +23,14 @@ public class AlbumRepo extends AbstractRepo {
 	public void save(AlbumEntity albumEntity) {
 		entityManager.persist(albumEntity);
 	}
-	
-}
+
+	public AlbumEntity getById(Long albumId) {
+		return entityManager.find(AlbumEntity.class, albumId);
+	}
+
+	public AlbumEntity getAlbumByid(Long aId) {
+		AlbumEntity aEntity = entityManager.find(AlbumEntity.class, aId);
+		return aEntity;
+	}
+
+};

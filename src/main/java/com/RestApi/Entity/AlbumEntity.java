@@ -1,13 +1,17 @@
 package com.RestApi.Entity;
 
 import java.util.Date;
+import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.PrePersist;
 import javax.persistence.Table;
@@ -39,7 +43,18 @@ public class AlbumEntity {
 	@JoinColumn(name="artist_id")
 	private ArtistEntity artistEntity;
 	
+	@OneToMany(mappedBy = "album", fetch= FetchType.EAGER, cascade= CascadeType.ALL)
+	private List<SongEntity> songs;
 	
+	
+	public List<SongEntity> getSongs() {
+		return songs;
+	}
+
+	public void setSongs(List<SongEntity> songs) {
+		this.songs = songs;
+	}
+
 	@PrePersist
 	public void onCreate() {
 		if(this.createdAt == null) {
